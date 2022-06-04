@@ -5,6 +5,8 @@ date:   2021-06-06 20:28:22 -0400
 categories: web2
 ---
 
+![image](/assets/img/paradise.jpeg)
+
 # SSH Session injection ?
 
 Mostly personal notes after revisiting the topic recently while looking into old el8 hacking techniques of the mid 00's.
