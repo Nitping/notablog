@@ -14,9 +14,10 @@ These notes serve as a reminder on the importance of reading documentation & und
 If you read any old hack logs from the golden era of hacking then you might have seen mentions of SSH session injection. The technique would allow some one to ptrace an open ssh client and open a 2nd session to an already opened server unbeknownst to the legitimate user the remote host the were connected to was just compromised silently without modifying the sshd binary (on disk or in memory).
  
 Previous public work:
-Trust Transience: Post Intrustion SSH Hijacking - Metlstorm 2008 [HERE](https://www.blackhat.com/presentations/bh-usa-05/bh-us-05-boileau.pdf).
 
-Officially "patched" in OpenSSH 5.1p1 - [HERE](https://github.com/openssh/openssh-portable/commit/8901fa9c88d52ac1f099e7a3ce5bd75089e7e731#diff-6e5958092d48b108bef3faadd24f2259a7e999ba8771cb64c986179c059fe130)
+### Trust Transience: Post Intrustion SSH Hijacking - Metlstorm 2008 [HERE](https://www.blackhat.com/presentations/bh-usa-05/bh-us-05-boileau.pdf).
+
+### Officially "patched" in OpenSSH 5.1p1 - [HERE](https://github.com/openssh/openssh-portable/commit/8901fa9c88d52ac1f099e7a3ce5bd75089e7e731#diff-6e5958092d48b108bef3faadd24f2259a7e999ba8771cb64c986179c059fe130)
 
 
 Lets examine the openssh-portable code base to see if this is still possible. If not, why?
@@ -193,7 +194,7 @@ $1 = 0
 
 # RTFM.
 
-It turns out reading all documentation before starting on a target withca goal may shed light on on ways to accomplish said goal. 
+It turns out reading all documentation before starting on a target with a goal may shed light on on ways to accomplish said goal. 
 
 ```
  - windows? https://github.com/PowerShell/openssh-portable/blob/latestw_all/ssh.c#L2189
