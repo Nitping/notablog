@@ -10,7 +10,7 @@ mode: dark # default theme "dark" | "light"
 
 # Profile settings
 author:
-  name: lcfr # author name
+  name: LCFR # author name
   bio: >- # tell to the world
     nobody
   username: lcfr.eth
