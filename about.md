@@ -1,5 +1,5 @@
 ---
-title: Colophon
+title: Nothingness
 permalink: /about/
 layout: page
 excerpt: nobody doing nothing.
