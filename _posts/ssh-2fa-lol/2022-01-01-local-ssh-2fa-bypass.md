@@ -17,7 +17,7 @@ Previous public work:
 
 [Trust Transience: Post Intrustion SSH Hijacking](https://www.blackhat.com/presentations/bh-usa-05/bh-us-05-boileau.pdf).
 
-Officially "patched" in OpenSSH 5.1p1 - [HERE](https://github.com/openssh/openssh-portable/commit/8901fa9c88d52ac1f099e7a3ce5bd75089e7e731#diff-6e5958092d48b108bef3faadd24f2259a7e999ba8771cb64c986179c059fe130)
+[Officially patched in OpenSSH 5.1p1](https://github.com/openssh/openssh-portable/commit/8901fa9c88d52ac1f099e7a3ce5bd75089e7e731#diff-6e5958092d48b108bef3faadd24f2259a7e999ba8771cb64c986179c059fe130)
 
 
 Lets examine the openssh-portable code base to see if this is still possible. If not, why?
