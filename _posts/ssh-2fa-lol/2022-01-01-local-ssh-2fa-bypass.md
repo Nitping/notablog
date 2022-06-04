@@ -11,7 +11,7 @@ Mostly personal notes after revisiting the topic recently while looking into old
 
 These notes serve as a reminder on the importance of reading documentation & understanding a high level overview of a target before reading/writing code to test theories.
 
-If you read any old hack logs from the golden era of hacking then you might have seen mentions of SSH session injection. The technique would allow some one to ptrace an open ssh client and open a 2nd session to an already opened server unbeknownst to the legitimate user the remote host the were connected to was just compromised silently without modifying the sshd binary (on disk or in memory).
+If you read any old hack logs from the golden era of hacking then you might have seen mentions of SSH session injection. The technique would allow some one to ptrace an open ssh client and open a 2nd session to an already opened server unbeknownst to the legitimate user the remote host they were connected to was just compromised silently without modifying the sshd binary (on disk or in memory).
  
 Previous public work:
 
