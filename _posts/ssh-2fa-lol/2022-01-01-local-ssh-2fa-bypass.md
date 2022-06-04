@@ -192,6 +192,11 @@ Quit
 $1 = 0
 ```
 
+At this point I start to consider how an attack would work. A small userland daemon running (hidden) which watches for ssh processes spawning and blocks the no-more-sessions string from being sent to servers?
+
+Seemed meh and convoluted.
+
+
 # RTFM.
 
 It turns out reading all documentation before starting on a target with a goal may shed light on on ways to accomplish said goal. 
