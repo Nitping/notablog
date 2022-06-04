@@ -11,7 +11,7 @@ Mostly personal notes after revisiting the topic recently while looking into old
 
 These notes serve as a reminder on the importance of reading documentation & understanding a high level overview of a target before reading/writing code to test theories.
 
-Maybe you read any old hack logs from the golden era of hacking then you might have seen mentions of SSH session injection. The technique would allow some one to ptrace an open ssh client and open a 2nd session to an already opened server unbeknownst to the legitimate user the remote host the were connected to was just compromised silently without modifying the sshd binary (on disk or in memory).
+If you read any old hack logs from the golden era of hacking then you might have seen mentions of SSH session injection. The technique would allow some one to ptrace an open ssh client and open a 2nd session to an already opened server unbeknownst to the legitimate user the remote host the were connected to was just compromised silently without modifying the sshd binary (on disk or in memory).
  
 Previous public work:
 Trust Transience: Post Intrustion SSH Hijacking - Metlstorm 2008 [HERE](https://www.blackhat.com/presentations/bh-usa-05/bh-us-05-boileau.pdf).
@@ -244,20 +244,44 @@ listed to receive this message upon request.
    client.
 ```
 
+# How to win? RTFM - Continued: SSH Multiplexing.
+
+It turns out that OpenSSH has supported multiplexing since version 3.9 released in 2004. SSH provides three command line options which can be used as SSH config file options as well.
+
+
+```
+ControlMaster
+Enables the sharing of multiple sessions over a single network connection. When set to yes, ssh(1) will listen for connections on a control socket specified using the ControlPath argument. Additional sessions can connect to this socket using the same ControlPath with ControlMaster set to no (the default). These sessions will try to reuse the master instance's network connection rather than initiating new ones, but will fall back to connecting normally if the control socket does not exist, or is not listening.
+Setting this to ask will cause ssh(1) to listen for control connections, but require confirmation using ssh-askpass(1). If the ControlPath cannot be opened, ssh(1) will continue without connecting to a master instance.
+
+X11 and ssh-agent(1) forwarding is supported over these multiplexed connections, however the display and agent forwarded will be the one belonging to the master connection i.e. it is not possible to forward multiple displays or agents.
+
+Two additional options allow for opportunistic multiplexing: try to use a master connection but fall back to creating a new one if one does not already exist. These options are: auto and autoask. The latter requires confirmation like the ask option.
+
+ControlPath
+Specify the path to the control socket used for connection sharing as described in the ControlMaster section above or the string none to disable connection sharing. Arguments to ControlPath may use the tilde syntax to refer to a user's home directory, the tokens described in the TOKENS section and environment variables as described in the ENVIRONMENT VARIABLES section. It is recommended that any ControlPath used for opportunistic connection sharing include at least %h, %p, and %r (or alternatively %C) and be placed in a directory that is not writable by other users. This ensures that shared connections are uniquely identified.
+
+ControlPersist
+When used in conjunction with ControlMaster, specifies that the master connection should remain open in the background (waiting for future client connections) after the initial client connection has been closed. If set to no (the default), then the master connection will not be placed into the background, and will close as soon as the initial client connection is closed. If set to yes or 0, then the master connection will remain in the background indefinitely (until killed or closed via a mechanism such as the "ssh -O exit"). If set to a time in seconds, or a time in any of the formats documented in sshd_config(5), then the backgrounded master connection will automatically terminate after it has remained idle (with no client connections) for the specified time.
+```
+
+The line: *Enables the sharing of multiple sessions over a single network connection.* 
+
+Sounds a lot like SSH Session Injection if the user is unaware of it happening? At least a viable altrnative now to pivot to the 2FA protected SSH jump box you may be targetting ;) 
 
 ## OFFENSIVE USE Example:
 
-Open a master connection the first time. For subsequent connections, route slave connections through the existing master connection. 
-In your ~/.ssh/config, set up connection sharing to happen automatically:
+An unsuspecting user/admin opens a master connection to a remote host. 
 
+For subsequent connections, route slave connections through the existing master connection by setting the ControlMaster and ControlPath options
+in the targets ~/.ssh/config
 
 ```
 ControlMaster auto
 ControlPath ~/.ssh/control:%h:%p:%r
 ```
 
-If you start an ssh session to the same (user, port, machine) as an existing connection, the second session will be tunneled over the first. 
-Establishing the second connection requires no new authentication and is very fast.
+If an attacker starts an ssh session to the same (user, port, machine) as an existing connection, the second session will be tunneled over the first using the same open connection.
 
 This can be used with a hidden .ssh/config to bypass needing SSH keys, 2FA codes etc for attackers 
 
