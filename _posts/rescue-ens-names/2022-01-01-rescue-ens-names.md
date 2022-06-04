@@ -1,20 +1,26 @@
 ---
 layout: post
-title:  "Using Flashbots to rescue ENS names from compromised wallets"
+title:  "Rescuing ENS names from compromised wallets."
 date:   2022-05-18 20:28:22 -0400
 categories: web3
 ---
+![image](/assets/img/lost.jpeg)
 
-# Rescuing ENS names from compromised wallets (overview).
 
-Inspired by nick.eth's twitter post [here](https://twitter.com/nicksdjohnson/status/1527065045678452736)
+This post inspired by nick.eth's twitter post [here](https://twitter.com/nicksdjohnson/status/1527065045678452736)
+
 ![image](/assets/img/nick.png)
 
-Often times when a wallet is compromised the attacker will leave some assets as a trap for the owner.
+# The problem:
+
+When a wallet is compromised, often times an attacker will leave some assets as a trap for the owner.
 
 The trap works as follows: 
-1) The attacker leaves some tokens in the compromised wallet but drains all the ether.
+
+1) wallet compromised & drained, attacker leaves some tokens in the compromised wallet but drains all the ether.
+
 2) This means the owner can not transfer the tokens in the wallet until they send it more ether to cover the gas fee.
+
 3) wait for the legitimate owner to try and save their precious tokens by sending eth to cover the gas fees of transferTo and and rob them again.
 
 A "sweeper" loads a private key and attempts to send the full balance in a loop without much worry about processing power.
@@ -22,7 +28,9 @@ Enabling it to run indefinately for free or until cancelled/closed.
 
 The problem being how does the hacked user send ether to the compromised account to fund the transaction of saving our tokens?
 
-# Enter Flashbots bundles & sponsored transactions:
+# The solution:
+
+Enter Flashbots bundles & sponsored transactions:
 [https://github.com/flashbots/searcher-sponsored-tx](https://github.com/flashbots/searcher-sponsored-tx)
 
 Sponsored transactions allow for one address to pay for the fees of another address's transaction by paying the miner directly using 
@@ -56,7 +64,7 @@ A sponsored transaction can only cover the MaxPriorityFeePerGas for another tran
 
 How do we send the address ether to cover the gas fee for MaxFeePerGas without the attackers robbing it?
 
-# Flashbots bundles
+# Flashbots bundles.
 
 Flashbots works by sending bundles of transactions in a sort of private pool where people bid/pay miners directly.
 
@@ -80,7 +88,7 @@ Step 2 - transferTo the token from the compromised wallet to the rescuer wallet.
 
 Step 3 - execute & pay for the transaction using sponsored transaction from the rescuer wallet via block.coinbase
 
-# usage example
+# Example
 ```commandline
 ENSRescue.py --name hero --hacked-key AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA --rescuer-key xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 [+] testnet enabled, connected to goerli infura node.
@@ -97,7 +105,7 @@ ENSRescue.py --name hero --hacked-key AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 [+] Transaction confirmed at block 6914889 [flashbots]
 ```
 
-# code
+# PoC
 
 ```python
 #
