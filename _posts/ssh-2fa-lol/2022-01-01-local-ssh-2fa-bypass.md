@@ -294,9 +294,13 @@ If an attacker starts an ssh session to the same (user, port, machine) as an exi
 This can be used with a hidden .ssh/config to bypass needing SSH keys, 2FA codes etc for attackers 
 
 # Demo - Terminal 1
+target connects to host requiring 2FA.
+
 ![image](/assets/img/ssh-session-term2.png)
 
 # Demo - Terminal 2
+attacker connects to target host while the admin's session is open with no 2FA or creds required
+
 ![image](/assets/img/ssh-session-term1.png)
 
 # EOF
