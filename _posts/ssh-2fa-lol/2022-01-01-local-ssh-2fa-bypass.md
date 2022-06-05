@@ -293,6 +293,12 @@ If an attacker starts an ssh session to the same (user, port, machine) as an exi
 
 This can be used with a hidden .ssh/config to bypass needing SSH keys, 2FA codes etc for attackers 
 
+# Demo - Terminal 1
+![image](/assets/img/ssh-session-term2.png)
+
+# Demo - Terminal 2
+![image](/assets/img/ssh-session-term1.png)
+
 # EOF
 
 Metlstorm suggested that RDP may be vulnerable to similar in the past in his talk. 🤷‍♂️
