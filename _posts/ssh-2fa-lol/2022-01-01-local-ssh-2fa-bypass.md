@@ -306,4 +306,5 @@ attacker connects to target host while the admin's session is open with no 2FA o
 # EOF
 
 Metlstorm suggested that RDP may be vulnerable to similar in the past in his talk. 🤷‍♂️
+
 Audit tip: check SSH implementations when auditing to see if they disallow further sessions after initial session creation.
