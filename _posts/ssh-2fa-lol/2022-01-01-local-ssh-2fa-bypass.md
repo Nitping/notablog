@@ -9,11 +9,11 @@ categories: web2
 
 # SSH Session injection ?
 
-Mostly personal notes after revisiting the topic recently while looking into old el8 hacking techniques of the mid 00's.
+Mostly personal notes after revisiting the subject recently while reminiscing on the glory days of hacking.
 
-These notes serve as a reminder on the importance of reading documentation & understanding a high level overview of a target before reading/writing code to test theories.
+These notes also are also a reminder on the importance of reading documentation and understanding a high level overview of something before reading/writing code to test theories.
 
-If you read any old hack logs from the golden era of hacking then you might have seen mentions of SSH session injection. The technique would allow some one to ptrace an open ssh client and open a 2nd session to an already opened server unbeknownst to the legitimate user the remote host they were connected to was just compromised silently without modifying the sshd binary (on disk or in memory).
+The technique mentioned would allow an attacker to ptrace() a target users open ssh client to open a second session to an already opened session/server connection unknowingly to the legitimate user the remote host where the session is connected. to was just compromised silently without modifying the sshd binary (on disk or in memory).
  
 Previous public work:
 
@@ -138,7 +138,7 @@ server_request_session(struct ssh *ssh)
 ...
 ```
 
-# Why we cant inject a new session:
+# Why we cant inject a new session today:
 
 At [0] ssh_session2_open is executed here to establish a channel/session with the server.
 
